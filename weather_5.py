@@ -49,9 +49,10 @@ def weather_data():
         """
         city_name = (data["name"])#都市
         weather_d = (data["weather"][0]["description"])#天気
-        min = (k2c(data["main"]["temp_min"]))#"最低気温=",
-        #min = "{:.1f}".format(min_a[0])
-        max = (k2c(data["main"]["temp_max"]))#"最高気温=",
+        min_a = k2c(data["main"]["temp_min"])#"最低気温=",
+        min = "{:.1f}".format(min_a)
+        max_a = k2c(data["main"]["temp_max"])#"最高気温=",
+        max = "{:.1f}".format(max_a)
         humidity = (data["main"]["humidity"])#"| 湿度=",
         pressure = ( data["main"]["pressure"])#"| 気圧=",
         #print("| 風向き=", data["wind"]["deg"])
@@ -63,6 +64,7 @@ def weather_data():
         title='flask test', city_name=city_name, weather_d=weather_d,
         min = min, max = max, humidity = humidity, pressure = pressure)
         #変更
+#余計なget とか入れない
 @app.route('/forecast')
 def weather_forecast():
 # APIキーの指定
