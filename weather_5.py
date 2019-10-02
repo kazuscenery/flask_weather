@@ -14,28 +14,28 @@ app = Flask(__name__)# インスタンスの作成
 
 @app.route('/')
 def weather_data():
-# APIキーの指定
-#apikey = "{あなたのAPIKEYを入れてください}" #{}　要らないドキュメント読もう
-    apikey = "4f014110bfdd5104f901ff1cd75112db"
+    # APIキーの指定
+    #apikey = "{あなたのAPIKEYを入れてください}" #{}　要らないドキュメント読もう
+    apikey = "api"
 
-# 天気を調べたい都市の一覧
+    # 天気を調べたい都市の一覧
     cities = ["Tokyo,JP"]
     weather_d = []
-# APIのひな型
+    # APIのひな型
     api = "http://api.openweathermap.org/data/2.5/weather?q={city}&APPID={key}"
 
-# 温度変換(ケルビン→摂氏)
+    # 温度変換(ケルビン→摂氏)
     k2c = lambda k: k - 273.15
 
-# 各都市の温度を取得する
+    # 各都市の温度を取得する
     for name in cities:
-    # APIのURLを得る
+        # APIのURLを得る
         url = api.format(city=name, key=apikey)
-    # 実際にAPIにリクエストを送信して結果を取得する
+        # 実際にAPIにリクエストを送信して結果を取得する
         r = requests.get(url)
-    # 結果はJSON形式なのでデコードする
+        # 結果はJSON形式なのでデコードする
         data = json.loads(r.text)
-    # 結果を出力
+        # 結果を出力
         """
         print("+ 都市=", data["name"])
         print("| 天気=", data["weather"][0]["description"])
@@ -63,32 +63,31 @@ def weather_data():
         return render_template('weather.html',cities =cities,
         title='flask test', city_name=city_name, weather_d=weather_d,
         min = min, max = max, humidity = humidity, pressure = pressure)
-        #変更
-#余計なget とか入れない
+        
 @app.route('/forecast')
 def weather_forecast():
-# APIキーの指定
-#apikey = "{あなたのAPIKEYを入れてください}" #{}　要らないドキュメント読もう
-    apikey = "4f014110bfdd5104f901ff1cd75112db"
+    # APIキーの指定
+    #apikey = "{あなたのAPIKEYを入れてください}" #{}　要らないドキュメント読もう
+    apikey = "api"
 
-# 天気を調べたい都市の一覧
+    # 天気を調べたい都市の一覧
     cities = ["Tokyo,JP"]#, "London,UK", "New York,US"]
     weather_d = []
-# APIのひな型
+    # APIのひな型
     #api = "http://api.openweathermap.org/data/2.5/weather?q={city}&APPID={key}"
     api = "http://api.openweathermap.org/data/2.5/forecast?q={city}&APPID={key}"
-# 温度変換(ケルビン→摂氏)
+    # 温度変換(ケルビン→摂氏)
     k2c = lambda k: k - 273.15
 
-# 各都市の温度を取得する
+    # 各都市の温度を取得する
     for name in cities:
-    # APIのURLを得る
+        # APIのURLを得る
         url = api.format(city=name, key=apikey)
-    # 実際にAPIにリクエストを送信して結果を取得する
+        # 実際にAPIにリクエストを送信して結果を取得する
         r = requests.get(url)
-    # 結果はJSON形式なのでデコードする
+        # 結果はJSON形式なのでデコードする
         data = json.loads(r.text)
-    # 結果を出力
+        # 結果を出力
 
         w=[p['weather'][0]['main'] for i, p in enumerate(data['list']) if i < 3]
         #最低気温
@@ -110,6 +109,7 @@ def weather_forecast():
             if i < 3:
                 temp_list.append(k2c(p['main']['temp']))
 
+                
         x = 0
         a = ("3hours: weather,{} / temp{:.1f} degrees".format(w[x],temp_list[x]))
         x = 1
@@ -117,16 +117,13 @@ def weather_forecast():
         x = 2
         c = ("9hours: weather,{} / temp{:.1f} degrees".format(w[x],temp_list[x]))
 
-
-
+        
         return render_template('weather_2.html',cities =cities,
         #title='flask test', city_name=city_name, weather_d=weathers_d,
         #temp_min_list = temp_min_list,
         #temp_max_list = temp_max_list,
         #temp_list = temp_list,
         a = a, b = b, c = c)#,
-
-#weather_data()
 
 if __name__ == "__main__":
     app.run(debug=True)
