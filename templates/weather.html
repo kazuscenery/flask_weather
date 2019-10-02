@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class = " text-center ">
+<h2>Hello</h2>
+<hr>
+<div class="p-1 mb-1 bg-primary text-white">
+  <font style="vertical-align: inherit;">
+    <font style="vertical-align: inherit;">
+      <h3>
+        Today's weather(今日の天気です)
+      </h3>
+
+    </font>
+  </font>
+</div>
+
+
+{% for name in cities%}
+<div class="container-fluid">
+<!--city_name-->
+    <p>Japan(日本)、{{name}}(東京)</p>
+    <p>weather(天気):{{weather_d}}</p>
+    <p>min(最低気温:){{min}}degrees(度)</p>
+    <p>max(最高気温:){{max}}degrees(度)</p>
+    <p>humidity(湿度):{{humidity}}</p>
+    <p>pressure(気圧):{{pressure}}</p>
+
+</div>
+{% endfor %}
+<p>
+  <a href="/forecast">Weather every 3 hours(３時間毎の天気)</a>
+</p>
+
+  </div>
+
+
+
+{% endblock %}

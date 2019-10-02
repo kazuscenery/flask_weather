@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class = " text-center ">
+  <h2>Hello</h2>
+<hr>
+<div class="p-1 mb-1 bg-primary text-white">
+  <font style="vertical-align: inherit;">
+    <font style="vertical-align: inherit;">
+      <h3>
+      The weather every 3 hours(3時間毎の天気です)
+      </h3>
+      
+    </font>
+  </font>
+</div>
+
+
+
+  {% for name in cities%}
+    <div class="text-center">
+<!--city_name-->
+      <p>Japan(日本)、{{name}}(東京)</p>
+      <p>Weather</p>
+
+        <div class="">
+          <p>
+          </p>
+          <p>
+            {{a}}
+          </p>
+          <p>
+            {{b}}
+          </p>
+          <p>
+            {{c}}
+          </p>
+        </div>
+      </div>
+      {% endfor %}
+
+      <p>
+        <input type="button" value="Go back to the previous page(前のページへ戻る)" onclick="history.back()">
+      </p>
+    </div>
+{% endblock %}
