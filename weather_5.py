@@ -12,7 +12,7 @@ import json
 app = Flask(__name__)# インスタンスの作成
 
 
-@app.route('/', methods=['GET'])
+@app.route('/')
 def weather_data():
 # APIキーの指定
 #apikey = "{あなたのAPIKEYを入れてください}" #{}　要らないドキュメント読もう
@@ -63,7 +63,7 @@ def weather_data():
         title='flask test', city_name=city_name, weather_d=weather_d,
         min = min, max = max, humidity = humidity, pressure = pressure)
         #変更
-@app.route('/forecast', methods=['GET'] methods=['GET'])
+@app.route('/forecast')
 def weather_forecast():
 # APIキーの指定
 #apikey = "{あなたのAPIKEYを入れてください}" #{}　要らないドキュメント読もう
